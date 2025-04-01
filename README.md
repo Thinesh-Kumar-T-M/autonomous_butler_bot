@@ -55,6 +55,35 @@ The Butler Controller is a ROS-based autonomous system designed to handle food d
 
 ---
 
+## Workflow Explanation
+1. When an order is placed at any table, the robot moves to the kitchen.
+2. The robot waits for kitchen confirmation. If confirmed, it proceeds to deliver the order; otherwise, it returns home after a timeout.
+3. The robot moves to the respective table and waits for table confirmation.
+4. After confirmation, it returns home.
+5. If an order is placed and later canceled, the robot moves back to the kitchen and then returns home.
+
+---
+
+## Running the Butler Controller
+# Clone this repository in your ROS workspace:
+```
+  cd ~/caktin_ws/src
+  git clone https://github.com/Thinesh-Kumar-T-M/autonomous_butler_bot
+```
+Now
+```
+  cd ~/catkin_ws && catkin_make
+
+```
+To start the controller, execute the following command:
+```
+rosrun butler butler_controller.py
+```
+## Make sure the simulation and navigation stack are already running:
+
+  Refer this repository for simulation setup: <link>https://github.com/Thinesh-Kumar-T-M/Autonomous-Mobile-Robot-Cream_Pi?tab=readme-ov-file#autonomous-mobile-robot-cream_pi</link>
+---
+
 ## Testing the Controller
 To manually test the system, use the following ROS commands:
 
@@ -81,23 +110,3 @@ rostopic pub /table1 butler/TableStatus '{order: true, cancel: true, table_id: "
 rostopic pub /table2 butler/TableStatus '{order: true, cancel: true, table_id: "table2"}'
 rostopic pub /table3 butler/TableStatus '{order: true, cancel: true, table_id: "table3"}'
 ```
-
----
-
-## Workflow Explanation
-1. When an order is placed at any table, the robot moves to the kitchen.
-2. The robot waits for kitchen confirmation. If confirmed, it proceeds to deliver the order; otherwise, it returns home after a timeout.
-3. The robot moves to the respective table and waits for table confirmation.
-4. After confirmation, it returns home.
-5. If an order is placed and later canceled, the robot moves back to the kitchen and then returns home.
-
----
-
-## Running the Butler Controller
-To start the controller, execute the following command:
-```
-rosrun butler butler_controller.py
-```
-Make sure the simulation and navigation stack are already running before executing this script.
-  Refer this repository for simulation setup: <link>https://github.com/Thinesh-Kumar-T-M/Autonomous-Mobile-Robot-Cream_Pi?tab=readme-ov-file#autonomous-mobile-robot-cream_pi</link>
----
